@@ -1,0 +1,33 @@
+{
+  "implicitDependencies": {
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    ".eslintrc.json": "*"
+  },
+  "affected": {
+    "defaultBase": "master"
+  },
+  "npmScope": "role-button",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
+    }
+  },
+  "projects": {
+    "role-button-demo": {
+      "tags": []
+    },
+    "role-button-demo-e2e": {
+      "tags": [],
+      "implicitDependencies": ["role-button-demo"]
+    },
+    "role-button-directive": {
+      "tags": []
+    }
+  }
+}

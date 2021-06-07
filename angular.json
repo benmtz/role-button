@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "role-button-demo",
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "css"
+    }
+  },
+  "projects": {
+    "role-button-demo": {
+      "projectType": "application",
+      "root": "apps/role-button-demo",
+      "sourceRoot": "apps/role-button-demo/src",
+      "prefix": "role-button",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/role-button-demo",
+            "index": "apps/role-button-demo/src/index.html",
+            "main": "apps/role-button-demo/src/main.ts",
+            "polyfills": "apps/role-button-demo/src/polyfills.ts",
+            "tsConfig": "apps/role-button-demo/tsconfig.app.json",
+            "assets": [
+              "apps/role-button-demo/src/favicon.ico",
+              "apps/role-button-demo/src/assets"
+            ],
+            "styles": ["apps/role-button-demo/src/styles.css"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/role-button-demo/src/environments/environment.ts",
+                  "with": "apps/role-button-demo/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "role-button-demo:build:production"
+            },
+            "development": {
+              "browserTarget": "role-button-demo:build:development",
+              "host": "0.0.0.0"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "role-button-demo:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/role-button-demo/src/**/*.ts",
+              "apps/role-button-demo/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/role-button-demo"],
+          "options": {
+            "jestConfig": "apps/role-button-demo/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "role-button-demo-e2e": {
+      "root": "apps/role-button-demo-e2e",
+      "sourceRoot": "apps/role-button-demo-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/role-button-demo-e2e/cypress.json",
+            "tsConfig": "apps/role-button-demo-e2e/tsconfig.e2e.json",
+            "devServerTarget": "role-button-demo:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "role-button-demo:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/role-button-demo-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "role-button-directive": {
+      "projectType": "library",
+      "root": "libs/role-button-directive",
+      "sourceRoot": "libs/role-button-directive/src",
+      "prefix": "role-button",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/role-button-directive"],
+          "options": {
+            "jestConfig": "libs/role-button-directive/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/role-button-directive/src/**/*.ts",
+              "libs/role-button-directive/src/**/*.html"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
