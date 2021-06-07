@@ -15,9 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@role-button/role-button-directive": [
-        "libs/role-button-directive/src/index.ts"
-      ]
+      "@benmtz/ng-role-button": ["libs/ng-role-button/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -3,7 +3,7 @@ import { Directive, ElementRef, HostBinding, HostListener } from '@angular/core'
 @Directive({
   selector: '[role="button"]'
 })
-export class RoleButtonDirective {
+export class NgRoleButtonDirective {
 
   @HostBinding("tabindex")
   tabindex = "0";

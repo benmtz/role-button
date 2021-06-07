@@ -151,17 +151,33 @@
         }
       }
     },
-    "role-button-directive": {
+    "ng-role-button": {
       "projectType": "library",
-      "root": "libs/role-button-directive",
-      "sourceRoot": "libs/role-button-directive/src",
+      "root": "libs/ng-role-button",
+      "sourceRoot": "libs/ng-role-button/src",
       "prefix": "role-button",
       "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/ng-role-button"],
+          "options": {
+            "project": "libs/ng-role-button/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/ng-role-button/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/ng-role-button/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/role-button-directive"],
+          "outputs": ["coverage/libs/ng-role-button"],
           "options": {
-            "jestConfig": "libs/role-button-directive/jest.config.js",
+            "jestConfig": "libs/ng-role-button/jest.config.js",
             "passWithNoTests": true
           }
         },
@@ -169,8 +185,8 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/role-button-directive/src/**/*.ts",
-              "libs/role-button-directive/src/**/*.html"
+              "libs/ng-role-button/src/**/*.ts",
+              "libs/ng-role-button/src/**/*.html"
             ]
           }
         }

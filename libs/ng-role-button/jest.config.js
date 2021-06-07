@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'role-button-directive',
+  displayName: 'ng-role-button',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -14,7 +14,7 @@ module.exports = {
       },
     },
   },
-  coverageDirectory: '../../coverage/libs/role-button-directive',
+  coverageDirectory: '../../coverage/libs/ng-role-button',
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',
